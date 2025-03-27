@@ -18,9 +18,9 @@ export default function ProductList({ products, editProduct, deleteProduct }) {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products.map((product, index) => (
               <tr key={product.id}>
-                <th scope="row">{product.id}</th>
+                <th scope="row">{index + 1}</th>
                 <td>{product.category}</td>
                 <td>{product.productName}</td>
                 <td>{product.productCode}</td>
@@ -29,7 +29,7 @@ export default function ProductList({ products, editProduct, deleteProduct }) {
                 <td>{new Date(product.createdAt).toLocaleDateString()}</td>
                 <td>
                   <div className="d-flex justify-content-center">
-                    <button className="btn btn-warning btn-sm me-2" onClick={() => editProduct(product)}>Edit</button> {/* Smaller buttons */}
+                    <button className="btn btn-warning btn-sm me-2" onClick={() => editProduct(product)}>Edit</button>
                     <button className="btn btn-danger btn-sm" onClick={() => deleteProduct(product.id)}>Delete</button>
                   </div>
                 </td>

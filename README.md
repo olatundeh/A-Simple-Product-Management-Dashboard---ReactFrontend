@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Product Management Application (frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React application for managing products with CRUD (Create, Read, Update, Delete) operations. It uses a backend API (assumed to be running on `https://localhost:7227/api`) and visualizes product data with a bar graph.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Before you begin, ensure you have the following installed:
 
-### `npm start`
+-   **Node.js:** (https://nodejs.org/)
+-   **npm** (Node Package Manager) or **yarn** (https://yarnpkg.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup Instructions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1.  **Clone the Repository:**
 
-### `npm test`
+    ```bash
+    git clone <repository_url>
+    cd <repository_directory>
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2.  **Install Dependencies:**
 
-### `npm run build`
+    Using npm:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    Or, using yarn:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    yarn install
+    ```
 
-### `npm run eject`
+3.  **Configure Environment Variables:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    -   Create a file named `.env` in the root directory of the project.
+    -   Add the API URL to the `.env` file:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+        ```
+        REACT_APP_API_URL=https://localhost:7227/api
+        ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    -   **Important:** Ensure that the backend API is running at the specified URL.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4.  **Start the Development Server:**
 
-## Learn More
+    Using npm:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```bash
+    npm start
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    Or, using yarn:
 
-### Code Splitting
+    ```bash
+    yarn start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    This will start the React development server. Open your browser and navigate to `http://localhost:3000` to view the application.
 
-### Analyzing the Bundle Size
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+product-management-app (frontend)/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Product.js          # Main product component
+│   │   ├── ProductList.js      # Component for displaying the product table
+│   │   ├── ProductGraph.js     # Component for displaying the product graph
+│   ├── App.js                # Main App component
+│   ├── index.js              # Entry point of the application
+│   ├── ...                   # Other source files
+├── .env                      # Environment variables
+├── package.json
+├── README.md
 
-### Making a Progressive Web App
+## Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-   **React:** JavaScript library for building user interfaces.
+-   **Axios:** Promise-based HTTP client for making API requests.
+-   **Bootstrap:** CSS framework for styling the application.
+-   **Chart.js:** Library for creating charts and graphs.
+-   **react-chartjs-2:** React wrapper for Chart.js.
 
-### Advanced Configuration
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+-   **Adding a Product:** Fill in the form fields and click the "Save" button.
+-   **Updating a Product:** Click the "Edit" button in the product list, modify the form fields, and click "Update".
+-   **Deleting a Product:** Click the "Delete" button in the product list.
+-   **Viewing Product Data:** The product graph displays the total stock quantity per category.
+-   **Viewing Product List:** The product list displays all the products.
 
-### Deployment
+## Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-   Replace `<repository_url>` with the actual URL of your repository.
+-   Ensure that the backend API is accessible and running on the specified URL.
+-   For production builds, use `npm run build` or `yarn build`.
+-   Do not commit the `.env` file to your version control system as it may contain sensitive information. Add it to your `.gitignore`.
+-   Ensure that the backend API is configured to handle Cross-Origin Resource Sharing (CORS) requests from `http://localhost:3000` during development.

@@ -26,7 +26,6 @@ export default function () {
     async function Load() {
         try {
             const response = await axios.get(`${apiUrl}/Product/GetAllProducts`);
-            console.log(response.data);
             setProduct(response.data);
         } catch (error) {
             console.error('Error loading products:', error);

@@ -37,17 +37,16 @@ export default function () {
     async function Save(event) {
         event.preventDefault();
         const productData = {
-          productName: productName,
-          productCode: productCode,
-          price: price,
-          quantity: quantity,
-          category: category,
-          createdAt: new Date().toISOString(),
+            productName: productName,
+            productCode: productCode,
+            price: price,
+            quantity: quantity,
+            category: category,
+            createdAt: new Date().toISOString(),
         };
-        console.log('Product data to be sent:', productData); // Add this line
         try {
-          await axios.post(`${apiUrl}/Product/AddProduct`, productData);
-          alert('Product created successfully');
+            await axios.post(`${apiUrl}/Product/AddProduct`, productData);
+            alert('Product created successfully');
             setId('');
             setName('');
             setProductCode('');
@@ -55,12 +54,12 @@ export default function () {
             setQuantity('');
             setCategory('');
             setCreatedAt('');
-        Load();
+            Load();
         } catch (error) {
-          console.error('Error saving product:', error);
-          alert('Failed to create product. Please try again.');
+            console.error('Error saving product:', error);
+            alert('Failed to create product. Please try again.');
         }
-      }
+    }
 
     async function editProduct(product) {
         setId(product.id);
@@ -168,12 +167,12 @@ export default function () {
                         </select>
                     </div>
                     <div>
-                        <button className='btn btn-primary' onClick={Save}>Save</button>
-                        <button className='btn btn-primary' onClick={update}>Update</button>
+                        <button className='btn btn-primary me-2 w-25' onClick={Save}>Save</button>
+                        <button className='btn btn-primary w-25' onClick={update}>Update</button>
                     </div>
                 </form>
-
             </div>
+            <br />
             <ProductGraph products={products} />
             <ProductList products={products} editProduct={editProduct} deleteProduct={deleteProduct} />
         </div>

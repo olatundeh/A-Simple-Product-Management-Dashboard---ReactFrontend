@@ -66,13 +66,19 @@ product-management-app (frontend)/
 │   └── index.html
 ├── src/
 │   ├── components/
-│   │   ├── Product.js          # Main product component
-│   │   ├── ProductList.js      # Component for displaying the product table
-│   │   ├── ProductGraph.js     # Component for displaying the product graph
-│   ├── App.js                # Main App component
-│   ├── index.js              # Entry point of the application
-│   ├── ...                   # Other source files
-├── .env                      # Environment variables
+│   │   ├── Product.js
+
+│   │   ├── ProductList.js
+
+│   │   ├── ProductGraph.js
+
+│   ├── App.js
+
+│   ├── index.js
+
+│   ├── ...
+├── .env
+
 ├── package.json
 ├── README.md
 

@@ -12,13 +12,21 @@ export default function ProductGraph({ products }) {
   }, {});
 
   const labels = Object.keys(categoryQuantities);
+  const quantities = Object.values(categoryQuantities);
+
+  const backgroundColors = labels.map(() => {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return `rgba(${r}, ${g}, ${b}, 0.5)`;
+  });
   const data = {
     labels,
     datasets: [
       {
         label: 'Total Stock Quantity per Category',
-        data: Object.values(categoryQuantities),
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        data: quantities,
+        backgroundColor: backgroundColors,
       },
     ],
   };

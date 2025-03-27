@@ -1,6 +1,7 @@
 import React, { useEffect, useState }  from 'react'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProductList from './ProductList';
 
 export default function () {
     const [id, setId] = React.useState('');
@@ -159,7 +160,7 @@ export default function () {
                 </form>
 
             </div>
-   
+            <ProductList products={products} editProduct={editProduct} deleteProduct={deleteProduct} />
         </div>
     )
 }

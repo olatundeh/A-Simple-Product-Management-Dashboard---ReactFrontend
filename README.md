@@ -14,7 +14,7 @@ Before you begin, ensure you have the following installed:
 1.  **Clone the Repository:**
 
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/olatundeh/A-Simple-Product-Management-Dashboard---ReactFrontend.git
     cd <repository_directory>
     ```
 
@@ -89,6 +89,7 @@ product-management-app (frontend)/
 -   **Bootstrap:** CSS framework for styling the application.
 -   **Chart.js:** Library for creating charts and graphs.
 -   **react-chartjs-2:** React wrapper for Chart.js.
+-   **react-router-dom:** React router for navigation.
 
 ## Usage
 

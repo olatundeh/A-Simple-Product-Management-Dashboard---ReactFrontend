@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductList from './ProductList';
@@ -6,14 +6,15 @@ import ProductGraph from './ProductGraph';
 
 export default function () {
     const [id, setId] = React.useState('');
-    const [productname, setName] = React.useState('');
-    const [productcode, setProductCode] = React.useState('');
+    const [productName, setName] = React.useState('');
+    const [productCode, setProductCode] = React.useState('');
     const [price, setPrice] = React.useState('');
     const [quantity, setQuantity] = React.useState('');
     const [category, setCategory] = React.useState('');
     const [products, setProduct] = React.useState([]);
+    const [createdAt, setCreatedAt] = useState('');
     const apiUrl = process.env.REACT_APP_API_URL;
-  
+
     if (!apiUrl) {
         throw new Error('API URL is not defined in .env file.');
     }
@@ -21,7 +22,7 @@ export default function () {
     useEffect(() => {
         (async () => await Load())();
     }
-    , []);
+        , []);
 
     async function Load() {
         try {
@@ -35,28 +36,31 @@ export default function () {
 
     async function Save(event) {
         event.preventDefault();
+        const productData = {
+          productName: productName,
+          productCode: productCode,
+          price: price,
+          quantity: quantity,
+          category: category,
+          createdAt: new Date().toISOString(),
+        };
+        console.log('Product data to be sent:', productData); // Add this line
         try {
-            await axios.post(`${apiUrl}/Product/AddProduct`, {
-                id: id,
-                productname: productname,
-                productcode: productcode,
-                price: price,
-                quantity: quantity,
-                category: category
-            });
-            alert('Product created successfully');
+          await axios.post(`${apiUrl}/Product/AddProduct`, productData);
+          alert('Product created successfully');
             setId('');
             setName('');
             setProductCode('');
             setPrice('');
             setQuantity('');
             setCategory('');
-            Load();
+            setCreatedAt('');
+        Load();
         } catch (error) {
-            console.error('Error saving product:', error);
-            alert('Failed to create product. Please try again.');
+          console.error('Error saving product:', error);
+          alert('Failed to create product. Please try again.');
         }
-    }
+      }
 
     async function editProduct(product) {
         setId(product.id);
@@ -77,6 +81,7 @@ export default function () {
             setPrice('');
             setQuantity('');
             setCategory('');
+            setCreatedAt('');
             Load();
         } catch (error) {
             console.error('Error deleting product:', error);
@@ -88,10 +93,10 @@ export default function () {
         event.preventDefault();
         try {
             await axios.patch(`${apiUrl}/Product/UpdateProduct/` + products.find((u) => u.id === id).id ||
-            id, {
+                id, {
                 id: id,
-                productname: productname,
-                productcode: productcode,
+                productName: productName,
+                productCode: productCode,
                 price: price,
                 quantity: quantity,
                 category: category
@@ -120,38 +125,47 @@ export default function () {
                     }} />
                     <div className="form-group">
                         <label htmlFor="name" className="form-label">Name</label>
-                        <input type="text" className="form-control" id="name" aria-describedby="productName" value={productname} onChange={(event) => {
+                        <input type="text" className="form-control" id="name" aria-describedby="productName" value={productName} onChange={(event) => {
                             setName(event.target.value);
                         }}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="productCode" className="form-label">Product Code</label>
-                        <input type="text" className="form-control" id="productCode" aria-describedby="productCode" value={productcode} onChange={(event)=> {
+                        <input type="text" className="form-control" id="productCode" aria-describedby="productCode" value={productCode} onChange={(event) => {
                             setProductCode(event.target.value);
                         }}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="price" className="form-label">Price</label>
-                        <input type="number" className="form-control" id="price" aria-describedby="price" value={price} onChange={(event)=> {
+                        <input type="number" className="form-control" id="price" aria-describedby="price" value={price} onChange={(event) => {
                             setPrice(event.target.value);
                         }}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="quantity" className="form-label">Quantity</label>
-                        <input type="number" className="form-control" id="quantity" aria-describedby="quantity" value={quantity} onChange={(event)=> {
+                        <input type="number" className="form-control" id="quantity" aria-describedby="quantity" value={quantity} onChange={(event) => {
                             setQuantity(event.target.value);
                         }}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="mb-3">
                         <label htmlFor="category" className="form-label">Category</label>
-                        <input type="text" className="form-control" id="category" aria-describedby="category" value={category} onChange={(event)=> {
-                            setCategory(event.target.value);
-                        }}
-                        />
+                        <select
+                            className="form-select"
+                            id="category"
+                            value={category}
+                            onChange={(event) => setCategory(event.target.value)}
+                        >
+                            <option value="">Select Category</option>
+                            <option value="Food">Food</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Books">Books</option>
+                            <option value="Home & Kitchen">Home & Kitchen</option>
+                        </select>
                     </div>
                     <div>
                         <button className='btn btn-primary' onClick={Save}>Save</button>

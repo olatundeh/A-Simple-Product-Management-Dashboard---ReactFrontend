@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default function ProductList({ products, editProduct, deleteProduct }) {
+export default function ProductList({ products, editProduct, deleteProduct, showForm }) {
   return (
     <div className="container mt-4">
+      <button className="btn btn-success mb-3" onClick={showForm}>Add New Product</button>
       <div className="table-responsive">
         <table className="table table-striped table-bordered table-hover">
           <thead className="table-dark">

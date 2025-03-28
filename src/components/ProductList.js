@@ -25,7 +25,7 @@ export default function ProductList({ products, editProduct, deleteProduct, show
                 <td>{product.category}</td>
                 <td>{product.productName}</td>
                 <td>{product.productCode}</td>
-                <td>${product.price.toFixed(2)}</td>
+                <td>£{product.price.toFixed(2)}</td>
                 <td>{product.quantity}</td>
                 <td>{new Date(product.createdAt).toLocaleDateString()}</td>
                 <td>

@@ -13,9 +13,11 @@ export default function Product() {
     const [quantity, setQuantity] = useState('');
     const [category, setCategory] = useState('');
     const [products, setProducts] = useState([]);
-    const apiUrl = process.env.REACT_APP_API_URL;
     const [showForm, setShowForm] = useState(false);
+    const [showUpdateButton, setShowUpdateButton] = useState(false);
+    const [showSaveButton, setShowSaveButton] = useState(true);
     const [errors, setErrors] = useState({});
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     if (!apiUrl) {
         throw new Error('API URL is not defined in .env file.');
@@ -60,6 +62,7 @@ export default function Product() {
             resetForm();
             Load();
             setShowForm(false);
+            setShowUpdateButton(false);
             setErrors({});
         } catch (error) {
             console.error('Error saving product:', error);
@@ -75,6 +78,8 @@ export default function Product() {
         setQuantity(product.quantity);
         setCategory(product.category);
         setShowForm(true);
+        setShowUpdateButton(true);
+        setShowSaveButton(false);
         setErrors({});
     }
 
@@ -126,6 +131,8 @@ export default function Product() {
     const handleCancel = () => {
         resetForm();
         setShowForm(false);
+        setShowUpdateButton(false);
+        setShowSaveButton(false);
         setErrors({});
     };
 
@@ -197,14 +204,15 @@ export default function Product() {
                                         </select>
                                         {errors.category && <div className="text-danger">{errors.category}</div>}
                                     </div>
+                                    <br />
                                     <div>
-                                        <button className="btn btn-primary me-2 w-25" onClick={Save}>Save</button>
-                                        <button className="btn btn-primary me-2 w-25" onClick={update}>Update</button>
+                                        {showSaveButton && <button className="btn btn-primary me-2 w-25" onClick={Save}>Save</button>}
+                                        {showUpdateButton && <button className="btn btn-primary me-2 w-25" onClick={update}>Update</button>}
                                         <button className="btn btn-secondary w-25" onClick={handleCancel}>Cancel</button>
                                     </div>
                                 </form>
                             ) : (
-                                <ProductList products={products} editProduct={editProduct} deleteProduct={deleteProduct} showForm={() => { setShowForm(true); resetForm() }} />
+                                <ProductList products={products} editProduct={editProduct} deleteProduct={deleteProduct} showForm={() => { setShowForm(true); setShowSaveButton(true); resetForm() }} />
                             )}
                         </div>
                     } />

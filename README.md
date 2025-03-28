@@ -93,7 +93,7 @@ product-management-app (frontend)/
 
 ## Usage
 
--   **Adding a Product:** Fill in the form fields and click the "Save" button.
+-   **Adding a Product:** Click the "Add New Product" button to view the new product form. Fill in the form fields and click the "Save" button.
 -   **Updating a Product:** Click the "Edit" button in the product list, modify the form fields, and click "Update".
 -   **Deleting a Product:** Click the "Delete" button in the product list.
 -   **Viewing Product Data:** The product graph displays the total stock quantity per category.

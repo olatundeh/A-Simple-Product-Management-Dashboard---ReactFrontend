@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductList from './ProductList';
 import ProductGraph from './ProductGraph';
+import ProductForm from './ProductForm';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 export default function Product() {
@@ -170,47 +171,26 @@ export default function Product() {
                         <div className="container mt-4">
                             <h1 className="text-center mb-4">Product Details</h1>
                             {showForm ? (
-                                <form>
-                                    <input type="text" className="form-control" id="id" hidden value={id} onChange={(event) => setId(event.target.value)} />
-                                    <div className="mb-3">
-                                        <label htmlFor="name" className="form-label">Name<span className="text-danger">*</span></label>
-                                        <input type="text" className="form-control" id="name" value={productName} onChange={(event) => setName(event.target.value)} />
-                                        {errors.productName && <div className="text-danger">{errors.productName}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="productCode" className="form-label">Product Code<span className="text-danger">*</span></label>
-                                        <input type="text" className="form-control" id="productCode" value={productCode} onChange={(event) => setProductCode(event.target.value)} />
-                                        {errors.productCode && <div className="text-danger">{errors.productCode}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="price" className="form-label">Price<span className="text-danger">*</span></label>
-                                        <input type="number" className="form-control" id="price" value={price} onChange={(event) => setPrice(event.target.value)} />
-                                        {errors.price && <div className="text-danger">{errors.price}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="quantity" className="form-label">Quantity<span className="text-danger">*</span></label>
-                                        <input type="number" className="form-control" id="quantity" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
-                                        {errors.quantity && <div className="text-danger">{errors.quantity}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="category" className="form-label">Category<span className="text-danger">*</span></label>
-                                        <select className="form-select" id="category" value={category} onChange={(event) => setCategory(event.target.value)}>
-                                            <option value="">Select Category</option>
-                                            <option value="Food">Food</option>
-                                            <option value="Electronics">Electronics</option>
-                                            <option value="Clothes">Clothes</option>
-                                            <option value="Books">Books</option>
-                                            <option value="Home & Kitchen">Home & Kitchen</option>
-                                        </select>
-                                        {errors.category && <div className="text-danger">{errors.category}</div>}
-                                    </div>
-                                    <br />
-                                    <div>
-                                        {showSaveButton && <button className="btn btn-primary me-2 w-25" onClick={Save}>Save</button>}
-                                        {showUpdateButton && <button className="btn btn-primary me-2 w-25" onClick={update}>Update</button>}
-                                        <button className="btn btn-secondary w-25" onClick={handleCancel}>Cancel</button>
-                                    </div>
-                                </form>
+                                <ProductForm
+                                    id={id}
+                                    productName={productName}
+                                    productCode={productCode}
+                                    price={price}
+                                    quantity={quantity}
+                                    category={category}
+                                    setId={setId}
+                                    setName={setName}
+                                    setProductCode={setProductCode}
+                                    setPrice={setPrice}
+                                    setQuantity={setQuantity}
+                                    setCategory={setCategory}
+                                    showSaveButton={showSaveButton}
+                                    showUpdateButton={showUpdateButton}
+                                    Save={Save}
+                                    update={update}
+                                    handleCancel={handleCancel}
+                                    errors={errors}
+                                />
                             ) : (
                                 <ProductList products={products} editProduct={editProduct} deleteProduct={deleteProduct} showForm={() => { setShowForm(true); setShowSaveButton(true); resetForm() }} />
                             )}

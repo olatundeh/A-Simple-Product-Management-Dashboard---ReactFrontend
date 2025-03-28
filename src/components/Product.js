@@ -95,10 +95,10 @@ export default function Product() {
     async function update(event) {
         event.preventDefault();
         try {
-            await axios.patch(`${apiUrl}/Product/UpdateProduct/{products.find((u) => u.id === id)?.id || id}`, {
+            await axios.patch(`${apiUrl}/Product/UpdateProduct`, {
                 id: id,
                 productName: productName,
-                productCode: productCode,
+                productCode: productCode,   
                 price: price,
                 quantity: quantity,
                 category: category,

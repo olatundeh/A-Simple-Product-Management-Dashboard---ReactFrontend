@@ -14,6 +14,7 @@ export default function Product() {
     const [quantity, setQuantity] = useState('');
     const [category, setCategory] = useState('');
     const [products, setProducts] = useState([]);
+    const [dateCreated, setDateCreated] = useState('');
     const [showForm, setShowForm] = useState(false);
     const [showUpdateButton, setShowUpdateButton] = useState(false);
     const [showSaveButton, setShowSaveButton] = useState(true);
@@ -78,6 +79,7 @@ export default function Product() {
         setPrice(product.price);
         setQuantity(product.quantity);
         setCategory(product.category);
+        setDateCreated(product.createdAt);
         setShowForm(true);
         setShowUpdateButton(true);
         setShowSaveButton(false);
@@ -108,6 +110,7 @@ export default function Product() {
                 price: price,
                 quantity: quantity,
                 category: category,
+                createdAt: dateCreated,
             });
             alert('Product updated successfully');
             resetForm();
@@ -127,6 +130,7 @@ export default function Product() {
         setPrice('');
         setQuantity('');
         setCategory('');
+        setDateCreated('');
     };
 
     const handleCancel = () => {

@@ -21,8 +21,7 @@ import '../App.css';
 export default function ProductList({ products, editProduct, deleteProduct, showForm }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('createdAt');
-  const [filterProductCode, setFilterProductCode] = useState('');
-  const [filterProductName, setFilterProductName] = useState('');
+  const [filter, setFilter] = useState('');
 
   const handleSort = (property) => (event) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -30,11 +29,18 @@ export default function ProductList({ products, editProduct, deleteProduct, show
     setOrderBy(property);
   };
 
-  const filteredProducts = products.filter(
-    (product) =>
-      product.productCode.toLowerCase().includes(filterProductCode.toLowerCase()) &&
-      product.productName.toLowerCase().includes(filterProductName.toLowerCase())
-  );
+  const filteredProducts = products.filter((product) => {
+    const productValues = Object.values(product).map((value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (value instanceof Date) {
+          return value.toLocaleDateString().toLowerCase();
+        }
+        return '';
+      }
+      return String(value || '').toLowerCase();
+    });
+    return productValues.some((value) => value.includes(filter.toLowerCase()));
+  });
 
   const sortedProducts = filteredProducts.slice().sort((a, b) => {
     const isAsc = order === 'asc';
@@ -64,28 +70,14 @@ export default function ProductList({ products, editProduct, deleteProduct, show
     <div className="container mt-4">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom:2}}>
         <IconButton aria-label="add" onClick={showForm}>
-          Add Product
+          Add New Product
           <Add />
         </IconButton>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <TextField
-            label="Filter Product Code"
-            value={filterProductCode}
-            onChange={(e) => setFilterProductCode(e.target.value)}
-            variant="outlined"
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            label="Filter Product Name"
-            value={filterProductName}
-            onChange={(e) => setFilterProductName(e.target.value)}
+            label="Filter Product Table"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
             variant="outlined"
             size="small"
             InputProps={{

@@ -90,6 +90,7 @@ product-management-app (frontend)/
 -   **Chart.js:** Library for creating charts and graphs.
 -   **react-chartjs-2:** React wrapper for Chart.js.
 -   **react-router-dom:** React router for navigation.
+-   **material-ui:** Material UI components.
 
 ## Usage
 
